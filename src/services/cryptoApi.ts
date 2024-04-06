@@ -18,8 +18,11 @@ export const cryptoApi = createApi({
         getAllCryptos: builder.query<CoinType[], void>({
             query:()=>
                  `v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en`
+        }),
+        getCrypto: builder.query({
+            query: (coinId)=> `/v3/coins/${coinId}`
         })
     })
 })
 
-export const {useGetCryptosMutation, useGetAllCryptosQuery} = cryptoApi
+export const {useGetCryptosMutation, useGetAllCryptosQuery, useGetCryptoQuery} = cryptoApi
