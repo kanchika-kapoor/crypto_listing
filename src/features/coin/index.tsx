@@ -22,7 +22,7 @@ const Detail = () => {
           </div>
       <div className="info">
         <div className="coin-heading">
-          {coin?.image?<img src={coin?.image?.url}/>:null}
+          {coin?.image?<img alt={coin?.name} src={coin?.image?.url}/>:null}
           <p>{coin?.name}</p>
           {coin?.symbol ? <p>{coin?.symbol.toUpperCase()}/USD</p>:null}
         </div>

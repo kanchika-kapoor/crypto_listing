@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useCallback} from 'react'
 import { useGetAllCryptosQuery, useGetCryptosMutation } from '../../services/cryptoApi'
 import {Link} from 'react-router-dom'
 import { CoinType } from '../../common/types'
@@ -12,12 +12,13 @@ const Home = () => {
   const {data: allCryptos} = useGetAllCryptosQuery()
   const pages = ["5","10","15","20","25","30"]
 
+  const fetchCoinData = useCallback(async () => {
+    await getCryptos({page, perPage})
+  },[getCryptos,page, perPage])
+
   useEffect(()=>{
-    const fetchCoinData = async () => {
-      await getCryptos({page, perPage})
-    }
     fetchCoinData()
-  },[page, perPage])
+  },[fetchCoinData])
 
   const handlePage = (e: React.ChangeEvent<HTMLSelectElement>)=>{
     setPerPage(e.target.value)
